@@ -1,4 +1,4 @@
-const subs = {
+let subs = {
   diet: 'body manipulation strategy',
   weight: 'valueless number',
   pound: 'brain cell',
@@ -23,15 +23,34 @@ form.addEventListener('submit', function moreSwitch(evt) {
   subs[remove.value] = replacement.value
   remove.value = ''
   replacement.value = ''
+//   chrome.storage.sync.set({subs: subs}, function() {
+//   console.log('Value is set to ' + subs);
+// });
+  chrome.tabs.query({
+    active: true,
+    currentWindow: true
+  }, function(tabs) {
+      chrome.tabs.sendMessage(tabs[0].id, {
+      subs: JSON.stringify(subs),
+      action: 'store'
+      });
+    });
+
 })
 
 ignite.addEventListener("click", function() {
+  // chrome.storage.sync.get(['subs'], function(result) {
+  //   subs = result.subs
+  //   console.log('Value currently is ' + result.subs);
+  // });
+
   chrome.tabs.query({
       active: true,
       currentWindow: true
   }, function(tabs) {
       chrome.tabs.sendMessage(tabs[0].id, {
-          subs: JSON.stringify(subs)
+          subs: JSON.stringify(subs),
+          action: 'go'
       });
   });
 });

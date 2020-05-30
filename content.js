@@ -3,12 +3,28 @@ const allChildren = body.getElementsByTagName('*')
 // const tester = document.getElementsByTagName('h1').item(1)
 const n = allChildren.length
 const allText = body.innerHTML
+let test = {}
 
-// window.addEventListener('load', function(){console.log(body.getElementsByTagName('*')[0])})
+chrome.storage.sync.get(['subs'], async function(result) {
+  test = await result.subs
+})
+
 
 chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
-  if (msg.subs) {
-      const subObj = JSON.parse(msg.subs)
+  if (msg.action==='store') {
+    let message = JSON.parse(msg.subs)
+    chrome.storage.sync.set({subs: message}, function() {
+      console.log('set')
+    });
+    chrome.storage.sync.get(['subs'], async function(result) {
+      test = await result.subs
+      console.log('results', result.subs);
+    });
+  }
+  if (msg.action==='go') {
+      // const subObj = JSON.parse(msg.subs)
+      let subObj = test
+
       const RE = new RegExp(Object.keys(subObj).join("|"), "gi");
       // body.innerHTML = allText.replace(RE, function(matched) {
       //   return subObj[matched]
