@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<head>
+  <title>Positivity</title>
+  <link rel = "stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <h1>Positivity</h1>
+    <p>Click below to replace problematic words with their more appropriate counterparts!</p>
+    <form id="extraSwitch">
+      <div class="form__group field">
+        <input id="remove" placeholder="Remove" name="Remove" type="input" class="form__field">
+        <label for="remove" class="form__label">Remove</label>
+      </div>
+      <div class="form__group field">
+        <input id="replacement" placeholder="Replacement" name="Replacement" type="input" class="form__field">
+        <label for="replacement" class="form__label">Replacement</label>
+      </div>
+      <button id='plus' type='submit'>+</button>
+    </form>
+    <span id='Positivify' type="submit" value="Positivify">Positivify</span>
+  </div>
+  <script type="module" src="popup.js"></script>
+</body>
