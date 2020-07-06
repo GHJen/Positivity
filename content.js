@@ -1,6 +1,5 @@
 const body = document.getElementsByTagName('body')[0]
 const allChildren = body.getElementsByTagName('*')
-// const tester = document.getElementsByTagName('h1').item(1)
 const n = allChildren.length
 const allText = body.innerHTML
 let test = {}
@@ -22,14 +21,9 @@ chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
     });
   }
   if (msg.action==='go') {
-      // const subObj = JSON.parse(msg.subs)
       let subObj = test
 
       const RE = new RegExp(Object.keys(subObj).join("|"), "gi");
-      // body.innerHTML = allText.replace(RE, function(matched) {
-      //   return subObj[matched]
-      // });
-
 
     for (let i=0; i<n; i++) {
       const child = allChildren[i]
@@ -54,8 +48,5 @@ chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
         };
       };
     }
-    //   allChildren[i].innerHTML = childText.replace(RE, function(matched) {
-    //     return subObj[matched]
-      // });
   }
 });
